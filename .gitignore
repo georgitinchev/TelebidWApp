@@ -1,0 +1,27 @@
+# Ignore Visual Studio temporary files and folders
+.vs/
+*.user
+*.suo
+*.cache
+*.csproj.user
+
+# Ignore build output
+bin/
+obj/
+*.exe
+*.dll
+
+# Ignore personal settings
+*.config
+*.dbmdl
+*.pdb
+
+# Ignore packages folder
+packages/
+
+# Ignore Rider settings (if using JetBrains Rider)
+.idea/
+
+# Ignore other unwanted files
+.DS_Store   # For MacOS
+Thumbs.db   # For Windows
