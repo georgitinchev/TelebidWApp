@@ -18,7 +18,7 @@ namespace WebAppTelebid
             _userRepository = userRepository;
         }
 
-        public void HandleRequest(IHttpListenerContext context) // Changed from HttpListenerContext to IHttpListenerContext
+        public void HandleRequest(HttpListenerContext context) 
         {
             string path = context.Request.Url?.AbsolutePath.ToLower() ?? "/";
             Console.WriteLine($"Handling request for path: {path}");
@@ -55,7 +55,7 @@ namespace WebAppTelebid
             }
         }
 
-        private void HandleDefaultRoute(IHttpListenerContext context)
+        private void HandleDefaultRoute(HttpListenerContext context)
         {
             if (context.Request.Cookies["userId"]?.Value != null)
             {
@@ -67,7 +67,7 @@ namespace WebAppTelebid
             }
         }
 
-        public void HandleRegister(IHttpListenerContext context)
+        public void HandleRegister(HttpListenerContext context)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace WebAppTelebid
             }
         }
 
-        private void ServeHtml(IHttpListenerContext context, string fileName, string message = null, string userId = null, string username = null)
+        private void ServeHtml(HttpListenerContext context, string fileName, string message = null, string userId = null, string username = null)
         {
             Console.WriteLine($"Serving HTML file: {fileName}");
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Views", fileName);
@@ -145,7 +145,7 @@ namespace WebAppTelebid
             Console.WriteLine("Response served and stream closed.");
         }
 
-        private void Serve404(IHttpListenerContext context)
+        private void Serve404(HttpListenerContext context)
         {
             context.Response.StatusCode = 404;
             context.Response.StatusDescription = "Not Found";
@@ -172,7 +172,7 @@ namespace WebAppTelebid
             return parsedData;
         }
 
-        public void HandleUpdate(IHttpListenerContext context)
+        public void HandleUpdate(HttpListenerContext context)
         {
             try
             {
@@ -236,7 +236,7 @@ namespace WebAppTelebid
             }
         }
 
-        public void HandleLogout(IHttpListenerContext context)
+        public void HandleLogout(HttpListenerContext context)
         {
             try
             {
@@ -257,7 +257,7 @@ namespace WebAppTelebid
             }
         }
 
-        public void HandleLogin(IHttpListenerContext context)
+        public void HandleLogin(HttpListenerContext context)
         {
             try
             {
@@ -304,7 +304,7 @@ namespace WebAppTelebid
             }
         }
 
-        public void HandleDashboard(IHttpListenerContext context)
+        public void HandleDashboard(HttpListenerContext context)
         {
             try
             {
@@ -338,7 +338,7 @@ namespace WebAppTelebid
             }
         }
 
-        public void HandleCaptcha(IHttpListenerContext context)
+        public void HandleCaptcha(HttpListenerContext context)
         {
             string captchaCode = GenerateCaptchaCode();
             var captchaCookie = new Cookie("captchaCode", captchaCode)

@@ -1,15 +1,16 @@
-﻿using WebAppTelebid.Interfaces;
+﻿using System.Net;
+using WebAppTelebid.Interfaces;
 
 namespace WebAppTelebid
 {
     public interface IRequestHandler
     {
-        void HandleRequest(IHttpListenerContext context);
-        void HandleRegister(IHttpListenerContext context);
-        void HandleLogin(IHttpListenerContext context);
-        void HandleUpdate(IHttpListenerContext context);
-        void HandleLogout(IHttpListenerContext context);
-        void HandleDashboard(IHttpListenerContext context);
-        void HandleCaptcha(IHttpListenerContext context);
+        void HandleRequest(HttpListenerContext context);
+        void HandleRegister(HttpListenerContext context);
+        void HandleLogin(HttpListenerContext context);
+        void HandleUpdate(HttpListenerContext context);
+        void HandleLogout(HttpListenerContext context);
+        void HandleDashboard(HttpListenerContext context);
+        void HandleCaptcha(HttpListenerContext context);
     }
 }
