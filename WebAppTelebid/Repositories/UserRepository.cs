@@ -10,7 +10,6 @@ namespace WebAppTelebid.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly IDatabaseHelper _databaseHelper;
-
         public UserRepository(IDatabaseHelper databaseHelper)
         {
             _databaseHelper = databaseHelper;

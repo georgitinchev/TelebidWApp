@@ -37,7 +37,7 @@ namespace WebAppTelebid.Services
             return -1;
         }
 
-        private string HashPassword(string password, byte[] salt)
+        public string HashPassword(string password, byte[] salt)
         {
             using (SHA256 sha256 = SHA256.Create())
             {

@@ -7,7 +7,7 @@ using System.Drawing.Imaging;
 
 namespace WebAppTelebid
 {
-    public class RequestHandler
+    public class RequestHandler : IRequestHandler
     {
         private readonly IAuthService _authService;
         private readonly IUserRepository _userRepository;
@@ -18,7 +18,7 @@ namespace WebAppTelebid
             _userRepository = userRepository;
         }
 
-        public void HandleRequest(HttpListenerContext context)
+        public void HandleRequest(IHttpListenerContext context) // Changed from HttpListenerContext to IHttpListenerContext
         {
             string path = context.Request.Url?.AbsolutePath.ToLower() ?? "/";
             Console.WriteLine($"Handling request for path: {path}");
@@ -55,7 +55,7 @@ namespace WebAppTelebid
             }
         }
 
-        private void HandleDefaultRoute(HttpListenerContext context)
+        private void HandleDefaultRoute(IHttpListenerContext context)
         {
             if (context.Request.Cookies["userId"]?.Value != null)
             {
@@ -67,7 +67,7 @@ namespace WebAppTelebid
             }
         }
 
-        private void HandleRegister(HttpListenerContext context)
+        public void HandleRegister(IHttpListenerContext context)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace WebAppTelebid
             }
         }
 
-        private void ServeHtml(HttpListenerContext context, string fileName, string message = null, string userId = null, string username = null)
+        private void ServeHtml(IHttpListenerContext context, string fileName, string message = null, string userId = null, string username = null)
         {
             Console.WriteLine($"Serving HTML file: {fileName}");
             string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Views", fileName);
@@ -145,7 +145,7 @@ namespace WebAppTelebid
             Console.WriteLine("Response served and stream closed.");
         }
 
-        private void Serve404(HttpListenerContext context)
+        private void Serve404(IHttpListenerContext context)
         {
             context.Response.StatusCode = 404;
             context.Response.StatusDescription = "Not Found";
@@ -154,6 +154,7 @@ namespace WebAppTelebid
             context.Response.OutputStream.Write(buffer, 0, buffer.Length);
             context.Response.OutputStream.Close();
         }
+
         private Dictionary<string, string> ParseFormData(string formData)
         {
             var parsedData = new Dictionary<string, string>();
@@ -171,7 +172,7 @@ namespace WebAppTelebid
             return parsedData;
         }
 
-        private void HandleUpdate(HttpListenerContext context)
+        public void HandleUpdate(IHttpListenerContext context)
         {
             try
             {
@@ -235,7 +236,7 @@ namespace WebAppTelebid
             }
         }
 
-        private void HandleLogout(HttpListenerContext context)
+        public void HandleLogout(IHttpListenerContext context)
         {
             try
             {
@@ -256,7 +257,7 @@ namespace WebAppTelebid
             }
         }
 
-        private void HandleLogin(HttpListenerContext context)
+        public void HandleLogin(IHttpListenerContext context)
         {
             try
             {
@@ -303,7 +304,7 @@ namespace WebAppTelebid
             }
         }
 
-        private void HandleDashboard(HttpListenerContext context)
+        public void HandleDashboard(IHttpListenerContext context)
         {
             try
             {
@@ -337,7 +338,7 @@ namespace WebAppTelebid
             }
         }
 
-        public void HandleCaptcha(HttpListenerContext context)
+        public void HandleCaptcha(IHttpListenerContext context)
         {
             string captchaCode = GenerateCaptchaCode();
             var captchaCookie = new Cookie("captchaCode", captchaCode)
