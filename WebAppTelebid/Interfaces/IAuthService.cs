@@ -9,5 +9,6 @@ namespace WebAppTelebid.Interfaces
     public interface IAuthService
     {
         int AuthenticateUser(string email, string password);
+        string HashPassword(string password, byte[] salt);
     }
 }
