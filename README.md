@@ -41,15 +41,10 @@ This project is a simple web server implemented without using any frameworks or 
    git clone <repository-url>
    cd <repository-directory>
 
-## Build and Run:
-
-1. Open the project in Visual Studio.
-2. Build the solution.
-3. Run the project. The server will start on `http://localhost:8080`.
-
-## Navigate to the Server:
-
-- Open a web browser and go to `http://localhost:8080`.
+## Run the Pre-built Version:
+- Navigate to the `published` folder in the root of the repository.
+- Use the provided shortcut to start the server.
+- The server will start automatically on `http://localhost:8080`.
 
 ## Functionalities Implemented
 
