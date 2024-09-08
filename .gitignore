@@ -5,11 +5,13 @@
 *.cache
 *.csproj.user
 
-# Ignore build output
+# Ignore build output from bin/ and obj/ folders, but NOT from the published folder
 bin/
 obj/
-*.exe
-*.dll
+
+# Don't ignore exe and dll files in the published folder
+!/published/**/*.exe
+!/published/**/*.dll
 
 # Ignore personal settings
 *.config
